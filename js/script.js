@@ -51,11 +51,11 @@ console.log(pokemonList);
 //spacings, and no spacings.
 //remembering to use the ; and '' instead of ""
 
-// In this This Loop + conditional I specify that the pokemon with a height smaller than 1 will have this message
+// In this This Loop + conditional I specify that the pokemon with a height greater than 1 will have this message
 
 for (var i = 0; i < pokemonList.length; i++) {
- if (pokemonList[i].height <= 1.0) {
-    document.write('<P>' +  pokemonList[i].name + ( ', height: ' )+ pokemonList[i].height + ( " (Tinny Pokemon)") + '<P>');
+ if (pokemonList[i].height >= 1.0) {
+    document.write('<P>' +  pokemonList[i].name + ( ', height: ' )+ pokemonList[i].height + ( " (Wow, That\'s big!)") + '<P>');
  } else {
    document.write('<P>' +  pokemonList[i].name + ( ', height: ' )+ pokemonList[i].height + '<P>')
   }
