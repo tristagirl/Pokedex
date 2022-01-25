@@ -1,6 +1,6 @@
 alert('Hello world')
 
-let PokemonList= [
+let pokemonList= [
   {
     name:'pikachu',
     height: 1.4,
@@ -45,7 +45,7 @@ let PokemonList= [
 
 ]
 
-console.log(PokemonList);
+console.log(pokemonList);
 
 // issues i am having when using js
 //spacings, and no spacings.
@@ -53,10 +53,10 @@ console.log(PokemonList);
 
 // In this This Loop + conditional I specify that the pokemon with a height smaller than 1 will have this message
 
-for (var i = 0; i < PokemonList.length; i++) {
- if (PokemonList[i].height <= 1.0) {
-    document.write('<P>' +  PokemonList[i].name + ( ', height: ' )+ PokemonList[i].height + ( " (Tinny Pokemon)") + '<P>');
+for (var i = 0; i < pokemonList.length; i++) {
+ if (pokemonList[i].height <= 1.0) {
+    document.write('<P>' +  pokemonList[i].name + ( ', height: ' )+ pokemonList[i].height + ( " (Tinny Pokemon)") + '<P>');
  } else {
-   document.write('<P>' +  PokemonList[i].name + ( ', height: ' )+ PokemonList[i].height + '<P>')
+   document.write('<P>' +  pokemonList[i].name + ( ', height: ' )+ pokemonList[i].height + '<P>')
   }
 }
