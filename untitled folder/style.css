@@ -1,0 +1,17 @@
+:root {
+  --background-color: #ffffff;
+  --background-color-secondary: #d9d9d9;
+  --primary-color: #353535;
+  --highlight-color: #3c6e71;
+  --warning-color: #9a031e;
+  --header-color: #3c6e71;
+  --primary-font: 'Dongle', sans-serif;
+  --font-weight-light: 300;
+  --font-weight-bold: 700;
+  --font-size-body: 32px;
+  --font-size-headings: 40px;
+}
+
+html {
+  box-sizing: border-box;
+}
