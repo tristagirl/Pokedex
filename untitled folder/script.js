@@ -1,5 +1,5 @@
 
-let pokemonReposityory = [function ()]
+let pokemonRepository = [function ()]
 
       let pokemonList= [
         {
@@ -57,15 +57,11 @@ let pokemonReposityory = [function ()]
       return {
         getAll: getAll,
         add: add
-      }
-})()
-
-pokemonList.forEach(function(pokemon) {
-  console.log(pokemonList.name + ' is ' + pokemon.height + 'tall');
-});
+      };
+})();
 
 pokemonRepository.loadList().then(function(){
-
   pokemonRepository.getAll().forEach(function(pokemon){
       pokemonRepository.addListItem(pokemon);
-    });
+  });
+});
