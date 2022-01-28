@@ -64,7 +64,8 @@ pokemonList.forEach(function(pokemon) {
   console.log(pokemonList.name + ' is ' + pokemon.height + 'tall');
 });
 
-userList.forEach(myLoopFunction);
-console.log(pokemonRepository.getAll()); // []
-pokemonRepository.add({ name: 'Pikachu'});
-console.log(pokemonRepository.getAll()); // [{ name: 'Pikachu'}]
+pokemonRepository.loadList().then(function(){
+
+  pokemonRepository.getAll().forEach(function(pokemon){
+      pokemonRepository.addListItem(pokemon);
+    });
