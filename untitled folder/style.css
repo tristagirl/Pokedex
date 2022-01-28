@@ -1,9 +1,14 @@
-:root {
-  --background-color: #ffffff;
-  --background-color-secondary: #d9d9d9;
-  --primary-font: 'Dongle', sans-serif;
+
+.pokemon-header {
+  font-size: 40px;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
-html {
-  box-sizing: border-box;
+.pokemonList {
+  max-width: none;
+  margin: 40px 80px;
+  text-align: left;
+  font-size: 20px;
+  font-family: Veranda, sans-serif;
 }
