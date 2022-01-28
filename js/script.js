@@ -1,62 +1,67 @@
-alert('Hello world')
 
-let pokemonList= [
-  {
-    name:'pikachu',
-    height: 1.4,
-    type:  ['electric' , 'static']
-  },
+let pokemonRepository = [function ()]
 
-  {
-    name: 'jigglypuff',
-    height: .7,
-    type: ['cute charm' , 'Competitive']
-  },
+      let pokemonList= [
+        {
+          name:'pikachu',
+          height: 1.4,
+          type:  ['electric' , 'static']
+        },
 
-  {
-    name: 'Zubat',
-    height: .8,
-    type:['poison' , 'ultrasonic waves']
-  },
+        {
+          name: 'jigglypuff',
+          height: .7,
+          type: ['cute charm' , 'Competitive']
+        },
 
-  {
-    name:'squirtle',
-    height: .5,
-    type: ['water' , 'Torrent']
-  },
+        {
+          name: 'Zubat',
+          height: .8,
+          type:['poison' , 'ultrasonic waves']
+        },
 
-  {
-    name: 'beedrill',
-    height: 1.2,
-    type: ['poison' , 'stings']
-  },
+        {
+          name:'squirtle',
+          height: .5,
+          type: ['water' , 'Torrent']
+        },
 
-  {
-    name:'arbok',
-    height: .9,
-    type: ['poison' , 'bite']
-  },
+        {
+          name: 'beedrill',
+          height: 1.2,
+          type: ['poison' , 'stings']
+        },
 
-  {
-    name:'ninetales',
-    height: 2.1,
-    type: ['fire' , 'flash fire']
-  }
+        {
+          name:'arbok',
+          height: .9,
+          type: ['poison' , 'bite']
+        },
 
+        {
+          name:'ninetales',
+          height: 2.1,
+          type: ['fire' , 'flash fire']
+        }
 ]
 
-console.log(pokemonList);
 
-// issues i am having when using js
-//spacings, and no spacings.
-//remembering to use the ; and '' instead of ""
+    function getAll () {
+        return pokemonList;
 
-// In this This Loop + conditional I specify that the pokemon with a height greater than 1 will have this message
+      }
+  function add (pokemon) {
+    pokemonList.push(pokemon);
+      }
 
-for (var i = 0; i < pokemonList.length; i++) {
- if (pokemonList[i].height >= 1.0) {
-    document.write('<P>' +  pokemonList[i].name + ( ', height: ' )+ pokemonList[i].height + ( " (Wow, That\'s big!)") + '<P>');
- } else {
-   document.write('<P>' +  pokemonList[i].name + ( ', height: ' )+ pokemonList[i].height + '<P>')
-  }
-}
+      return {
+        getAll: getAll,
+        add: add
+      };
+})();
+
+pokemonRepository.loadList().then(function(){
+  pokemonRepository.getAll().forEach(function(pokemon){
+      pokemonRepository.addListItem(pokemon);
+  });
+});
