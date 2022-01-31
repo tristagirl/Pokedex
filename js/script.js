@@ -1,7 +1,7 @@
 
 let pokemonRepository = [function ()]
 
-      let pokemonList= [
+      let repository = [
         {
           name:'pikachu',
           height: 1.4,
@@ -9,33 +9,9 @@ let pokemonRepository = [function ()]
         },
 
         {
-          name: 'jigglypuff',
-          height: .7,
-          type: ['cute charm' , 'Competitive']
-        },
-
-        {
-          name: 'Zubat',
-          height: .8,
-          type:['poison' , 'ultrasonic waves']
-        },
-
-        {
-          name:'squirtle',
-          height: .5,
-          type: ['water' , 'torrent']
-        },
-
-        {
           name: 'beedrill',
           height: 1.2,
           type: ['poison' , 'stings']
-        },
-
-        {
-          name:'arbok',
-          height: .9,
-          type: ['poison' , 'bite']
         },
 
         {
