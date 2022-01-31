@@ -1,25 +1,22 @@
+let pokemonRepository = (function () {
 
-let pokemonRepository = [function ()]
-
-      let repository = [
-        {
-          name:'pikachu',
-          height: 1.4,
-          type:  ['electric' , 'static']
-        },
-
-        {
-          name: 'beedrill',
-          height: 1.2,
-          type: ['poison' , 'stings']
-        },
-
-        {
-          name:'ninetales',
-          height: 2.1,
-          type: ['fire' , 'flash fire']
-        },
-];
+let repository = [
+    {
+      name: "Bulbasaur",
+      height: 0.7,
+      types: ["grass", "poison"],
+    },
+    {
+      name: "Charizard",
+      height: 1.7,
+      types: ["fire", "flying"],
+    },
+    {
+      name: "Squirtle",s
+      height: 1,
+      types: ["water"],
+    },
+  ];
 
   function add(pokemon) {
     if (
