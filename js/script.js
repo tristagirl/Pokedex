@@ -45,7 +45,7 @@ let pokemonRepository = [function ()]
         },
 ];
 
-function add(pokemon) {
+  function add(pokemon) {
     if (
       typeof pokemon === "object" &&
       "name" in pokemon &&
