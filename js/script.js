@@ -60,7 +60,22 @@ let pokemonRepository = [function ()]
       };
 })();
 
-pokemonRepository.loadList().then(function(){
-  pokemonRepository.getAll().forEach(function(pokemon))
-  });
+console.log(pokemonRepository.getAll());
+poekemonRepository.add((name: "pikachu", height: 1.4,
+types: ["electric"]));
+
+console.log(pokemonRepository.getAll());
+
+pokemonRepositroy.getAll().forEach(function (pokemon){
+  let pokemonList = document.querySelector(".pokemon-list");
+  let listpokemon = document.createElement("li");
+  let button = document.createElement("button");
+  button.innerText = "placeholder";
+  button.classList.add("button-class");
+  listpokemon.appendChild(button);
+  pokemonList.appendChild(listpokemon);
+
+
+}
+
 });
