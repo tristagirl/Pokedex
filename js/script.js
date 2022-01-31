@@ -12,7 +12,7 @@ let repository = [
       types: ["fire", "flying"],
     },
     {
-      name: "Squirtle",s
+      name: "Squirtle",
       height: 1,
       types: ["water"],
     },
