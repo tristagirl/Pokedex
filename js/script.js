@@ -1,37 +1,38 @@
 
 let pokemonRepository = (function () {
 
-  let pokemonList = [];
-  pokemonList[0] = {
+  let pokemonList = [
+    {
       name:'pikachu',
       height: 1.4,
       type:  ['electric' , 'static']
-    };
-  pokemonList[1] = {
+    },
+    {
       name: 'Zubat',
       height: 0.8,
       type:['poison' , 'ultrasonic waves']
-    };
-    pokemonList[2] = {
+    },
+    {
       name:'squirtle',
       height: 0.5,
       type: ['water' , 'Torrent']
-    };
-    pokemonList[3] = {
+    },
+    {
       name: 'beedrill',
       height: 1.2,
       type: ['poison' , 'stings']
-    };
-    pokemonList[4] = {
+    },
+    {
       name:'arbok',
       height: 0.9,
       type: ['poison' , 'bite']
-    };
-    pokemonList[5] = {
+    },
+    {
       name:'ninetales',
       height: 2.1,
       type: ['fire' , 'flash fire']
-    };
+    }
+  ];
     function add(pokemon) {
     //validate type of passed parameter to be an object
     if(typeof pokemon === 'object' && !Array.isArray(pokemon)){
