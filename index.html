@@ -1,14 +1,25 @@
- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>pokedex</title>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta name="description" content="An application to see all information of every Pokémon.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Pokedex</title>
   </head>
   <body>
-    <h1>pokedex</h1>
-    <ul class="pokemon-list"></ul>
+    <div class="flex-container">
+      <header class="page-header">
+        <p class="page-header__item page-header__name">Pokedex</p>
+      </header>
+      <main>
+        <ul class ="pokemon-list"></ul>
+      </main>
+    </div>
     <script src="js/script.js"></script>
   </body>
 </html>
