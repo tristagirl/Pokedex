@@ -1,128 +1,192 @@
-
-let pokemonRepository = (function () {
+// Creating and IIFE for pokemonList
+let pokemonRepository = (function(){
+  // Creating an array to hold pokemon objects
   let pokemonList = [];
-  //Pokemon API
-  let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-  //added function to return the "pokemonList"
+// function to add a pokemon to the pokemonList
+  function add(pokemon) {
+    //validating type of passed parameter to be an object
+    if(typeof pokemon === 'object' && !Array.isArray(pokemon)){
+      //validating Object.keys() to equal expected keys
+      if(Object.keys(pokemon)[0] === 'name' &&
+        Object.keys(pokemon)[1] === 'detailsUrl'){
+        pokemonList.push(pokemon);
+      }
+    }
+  }
+
   function getAll() {
     return pokemonList;
   }
 
-  //added function to add new pokemen to the "pokemonList"
-  function add(pokemon) {
-    //checks that only certain properties will be accepted when adding a new pokemon
-    if (
-      typeof pokemon === "object" &&
-      "name" in pokemon &&
-      "detailsUrl" in pokemon
-    ) {
-      //if property has been validated, new pokemon will be added
-      pokemonList.push(pokemon);
-    } else {
-      // otherwise error message
-      console.log("error");
-    }
+// function that allows to find specific Pokémon only by name
+  function findPokemon(searchName){
+    let filteredPokemon = pokemonList.filter(pokemon => pokemon.name === searchName);
+    return filteredPokemon
   }
 
-  //added function to create buttons which display each pokemon in HTML
+// function to load list of pokemon from apiUrl, stores name & detailsUrl in pokemonList via add()
+  function loadList(){
+    showLoadingSpinner();
+    return fetch(apiUrl).then(function(response){
+      hideLoadingSpinner();
+      return response.json();
+    }).then(function(json){
+      json.results.forEach(function(item){
+        let pokemon  = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function(e){
+      hideLoadingSpinner();
+      console.error(e);
+    });
+  }
+
+// function to load further details about pokemon (items) in the pokemonList: image, height & types
+  function loadDetails(item){
+    showLoadingSpinner();
+    let url = item.detailsUrl;
+    return fetch(url).then(function(response){
+      hideLoadingSpinner();
+      return response.json();
+    }).then(function(details){
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function(e){
+      hideLoadingSpinner();
+      console.error(e);
+    });
+  }
+
+// function to show loading animation when loading pokemon details
+  function showLoadingSpinner(){
+    let loadingContainer = document.querySelector('#loading-container');
+
+    // Clear preexisting content
+    loadingContainer.innerHTML = '';
+
+    // Add spinner element
+    let spinner = document.createElement('div');
+    spinner.classList.add('spinner');
+    loadingContainer.appendChild(spinner);
+
+    // make container and spinner visible
+    loadingContainer.classList.add('is-visible');
+  }
+
+// function to hide loading animation when loading pokemon details
+  function hideLoadingSpinner(){
+    let loadingContainer = document.querySelector('#loading-container');
+    loadingContainer.classList.remove('is-visible');
+  }
+
+// function that creates a button as list item for a passed pokemon
   function addListItem(pokemon) {
-
-    let list = document.querySelector(".pokemon-list");
-    let listItem = document.createElement("li");
-    let button = document.createElement("button");
-    // creating text inside the button element
-    button.innerHTML = pokemon.name;
-    //adding a classlist of button
-    button.classList.add("btn");
-    //add button as a list item
+    let ulElement = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('pokemon-button');
     listItem.appendChild(button);
-    //adding the list time to the main pokemon list
-    list.appendChild(listItem);
+    ulElement.appendChild(listItem);
 
-    //adding eventhandler to the button that will show the logged pokemon  on click
-    button.addEventListener("click", (event) => {
+    // Adding an event listener to newly created button
+    buttonEventListener(button,pokemon);
+  }
+
+// function to add an event listener to a button that will show details of the pokemon when the button is clicked
+  function buttonEventListener(button,pokemon){
+    button.addEventListener('click', function(){
       showDetails(pokemon);
     });
   }
 
-  //adding function to log the name of the pokemon
-  //function showDetails(pokemon) {
-  //console.log(pokemon);
-  //}
-
-  //adding promise function
-  function loadList() {
-    //using the fetch method to get pokemon API " result will be the "response", which is a promise
-    return fetch(apiUrl)
-      .then(function (response) {
-        // the reponse is in a json file
-        return response.json();
-      })
-      //we run a forEach loop on the json
-      .then(function (json) {
-        //"json" object is the file with all the pokemon, result is  json key taken from the json file list,
-        //the forEach loop will iterate trough all the different pokemon in the json file.
-        json.results.forEach(function (item) {
-          //for each of these pokemon item a variable will be created as pokemon and turned into an object with two key-value pairs
-          let pokemon = {
-            //"item." here is the parameter of function, "name" and "url" are keys taken from the json file list
-            name: item.name,
-            detailsUrl: item.url,
-          };
-          //calling add function to
-          add(pokemon);
-        });
-      })
-      .catch(function (e) {
-        console.error(e);
-      });
-  }
-
-  // use the "detailsUrl" property to load the detailed data for a given Pokémon.
-  //for this, you add a loadDetails() function, which takes a Pokémon item as an argument
-  function loadDetails(item) {
-    let url = item.detailsUrl;
-    return fetch(url)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (details) {
-        //item is from the loadDetails parameter, imageURL is a variable that was just created, details
-        //the parameter of this function, "sprites.height.types." are from the second  json file list when you click on the "url" in the first json file list
-        item.imageUrl = details.sprites.front_default;
-        item.height = details.height;
-        item.types = details.types;
-      })
-      .catch(function (e) {
-        console.error(e);
-      });
-  }
-
-  //the showDetails() function is executed when a user clicks on a Pokémon and you get the Pokémon’s details from the server.
-  //showDetails function will execute
-  function showDetails(item) {
-    //the loadDetails function with pokemon as parameter and adds a function as a promise and then to return a console log
-    loadDetails(item).then(function () {
-      console.log(item);
+// function that loads details from api & then prints details onto console
+  function showDetails(pokemon){
+    loadDetails(pokemon).then(function () {
+      showModal(pokemon.name, 'Height: ' + pokemon.height, pokemon.imageUrl);
     });
   }
 
-  //IIFE will return an object with  methods to have access to these previously created functions
+// function to show modal with pokemon details
+  function showModal(title, text, img_src) {
+    let modalContainer = document.querySelector('#modal-container');
+
+    // Clear preexisting content
+    modalContainer.innerHTML = '';
+
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    // Add new modal content
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+
+    // Close modal when user clicks on 'Close'
+    closeButtonElement.addEventListener('click', hideModal);
+
+    let modalTitle = document.createElement('h1');
+    modalTitle.innerText = title;
+
+    let modalText = document.createElement('p');
+    modalText.innerText = text;
+
+    let modalImg = document.createElement('img');
+    modalImg.classList.add('modal-img');
+    modalImg.src = img_src;
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(modalTitle);
+    modal.appendChild(modalText);
+    modal.appendChild(modalImg);
+    modalContainer.appendChild(modal);
+
+    // make modal visible
+    modalContainer.classList.add('is-visible');
+
+    // Close modal when user clicks on 'Close'
+    closeButtonElement.addEventListener('click', hideModal);
+
+    // Close modal when modal is open and user clicks outside of the modal
+    modalContainer.addEventListener('click', (e) => {
+      let target = e.target;
+      if (target === modalContainer){
+        hideModal();
+      }
+    });
+  }
+
+  // function to hide modal
+  function hideModal(){
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+  }
+
+  // when modal is open and user clicks 'Escape' modal will close
+  window.addEventListener('keydown', (e) => {
+    let modalContainer = document.querySelector('#modal-container');
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')){
+      hideModal();
+    }
+  });
+
   return {
     getAll: getAll,
-    add: add,
+    findPokemon: findPokemon,
     addListItem: addListItem,
-    loadList: loadList,
-    loadDetails: loadDetails,
+    loadList: loadList
   };
 })();
 
-//this will call the api to display
-pokemonRepository.loadList().then(function () {
-  // IIFE returned function to retrieve "pokemonList"
-  //forEach method iterate trough each pokemon to display button with pokemon name in the browser
-  pokemonRepository.getAll().forEach((pokemon) => {
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function(){
+  // Creating a list of buttons for each pokemon in the repository
+  pokemonRepository.getAll().forEach(function(pokemon){
+      pokemonRepository.addListItem(pokemon);
   });
 });
