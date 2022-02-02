@@ -1,247 +1,164 @@
+
+/*
+.button-class {
+    border: none;
+    background-color: lightpurple;
+    padding: 16px 32px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+*/
 :root {
-  --background-color: #ffffff;
-  --background-color-secondary: #d9d9d9;
-  --primary-color: #353535;
-  --highlight-color: #423a70;
-  --warning-color: #9a031e;
-  --header-color: #423a70;
-  --primary-font: 'Arial', sans;
-  --font-weight-light: 200;
-  --font-weight-bold: 500;
-  --font-size-body: 30px;
-  --font-size-headings: 38px;
+    --background-color: #fcf7ff;
+    --primary-color: #725AC1;
+    --text-color: #fcf7ff;
+    --border-color: #d5e1ed;
+    --fontsize-body: 16px;
+    --fontsize-h1: 32px;
+    --fontsize-h2: 26px;
+    --fontsize-h3: 16px;
+    --fontweight-body: 300;
+    --fontweight-h: 800;
+    --linehight: 1.6;
 }
 
-html {
-  box-sizing: border-box;
+* {
+    box-sizing: border-box;
 }
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
 
 body {
-  color: var(--primary-color);
-  background-color: var(--background-color);
-  font-family: var(--primary-font);
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-body);
-
-  line-height: .5;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-family: Roboto Mono, sans-serif;
+    font-weight: var(--fontweight-body);
+    line-height: var(--linehight);
+    font-size: var(--fontsize-body);
 }
 
-.flex-container{
-  display: flex;
-  flex-direction: column;
-  min-height: 50vh;
+h1 {
+    font-size: var(--fontsize-h1);
+    font-weight: var(--fontweight-h);
+    margin: 8px;
+    text-transform: capitalize;
 }
 
-main {
-  flex: 1;
-  margin: 20px;
+.page-container {
+  margin-top: 80px;
+  margin-left: 5px;
 }
 
-.page-header {
-  display: inline-flex;
-  width: 100%;
-  padding: 15px;
-  background-color: var(--header-color);
+.list-container {
+  display: table;
+  margin: auto 40px;
 }
 
-.page-header__item {
-  flex: 1;
-  align-items: center;
-  margin: 10px;
+.pokemon-list {
+  padding: 0;
 }
 
-.page-header__logo {
-  max-width: 40px;
-  max-height: 40px;
+
+.listItem-class {
+  list-style-type: none;
+  display: inline;
 }
 
-.page-header__name {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-headings);
-  color: #ffffff;
-}
-
-.pokemon-list li .pokemon-button{
-  display: inline-block;
-  width: 45%;
-}
-
-@supports (display: grid){
-  .pokemon-list li {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 5px;
-    padding: 5px;
-    margin: 5px;
-    list-style-type: none;
-  }
-}
-
-/* stlying of the pokemon-button element as grid item */
-.pokemon-list li .pokemon-button {
-  width: auto;
-  min-height: auto;
-  background-color: var(--background-color-secondary);
-  color: var(--highlight-color);
-  font-weight: var(--font-weight-bold);
-
-  /* allow text in button to break when screen is too small */
-  word-wrap: break-word;
-  word-break: break-all;
-
-  /* adds spacing to the button (this will be discussed more in-depth later) */
-  padding: 10px;
-  margin: 5px;
-  border-radius: 3px;
-
-  /* gives the button a bottom border with a width of 2px, a type of solid, and a color in RGBA format */
-  border-bottom: 3px solid rgba(0, 0, 0, 0.3);
-  transition: 0.2s opacity;
-}
-
-/* styling hover effects for the button */
-.pokemon-list li .pokemon-button:hover {
-  /* lets the mouse appear as a hand when hovering over the button */
+.button-class {
+  border: none;
+  color: var(--text-color);
+  text-align: center;
+  text-decoration: none;
+  margin: 8px 8px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
   cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  width: 200px;
+  height: 200px;
+  text-transform: capitalize;
+  border-radius: 2%;
+  }
 
-  /* reduces the opacity of the button to 80% */
+  .button-class:hover {
+    opacity: 0.8;
+  }
+
+
+.pokemon-image {
+  transition: transform 0.4s;
+}
+
+.pokemon-image:hover {
+  transform: scale(1.5);
+}
+
+#search-pokemon {
+  background-color: var(--background-color);
+  border-color: var(--primary-color);
+  transition: transform 0.4s;
+}
+
+#search-pokemon:hover {
+  transform: scale(1.1);
+  transition: transform 0.4s;
+}
+
+.form-control::placeholder {
+  color: var(--primary-color);
+}
+
+.navbar-brand {
+  font-size: var(--fontsize-h1);
+  font-weight: var(--fontweight-h);
+}
+
+.navbar-light .navbar-brand {
+  color: var(--primary-color);
+}
+
+.navbar-light .navbar-brand:hover {
+  color: var(--primary-color);
   opacity: 0.8;
 }
 
-/* different background color when button is clicked */
-.pokemon-list li .pokemon-button:active {
-  background-color: #969696;
-}
-
-/* modal styling */
-#modal-container {
-  display: none;
-}
-
-#modal-container.is-visible {
-  position: fixed;
-  padding: 20px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-
-  /* to show it above other content */
-  z-index: 999;
-
-  /* to allow scrolling if the screen is not high enough*/
-  overflow: auto;
-
-  /* this is used to center the modal */
-  display: grid;
+.modal-content {
   text-align: center;
 }
 
-.modal {
-  margin: auto;
-  display: inline-block;
-  background: #fff;
-  padding: 15px;
-  width: 100%;
-  max-width: 700px;
-  text-align: left;
-
-  /* allow text in modal to break when screen is too small */
-  word-wrap: break-word;
-  word-break: break-all;
+.modal-body {
+  text-transform: capitalize;
+  border: 2px solid;
+  margin: 20px 20px;
+  border-radius: 2%;
 }
 
-.modal-close {
-  float: right;
-  -webkit-appearance: none;
-  border: 0;
-  background: none;
-  color: #777;
-  text-decoration: underline;
+.btn {
+  background-color: var(--primary-color);
 }
 
-.modal h1 {
-  margin: 5px;
-  /* font-size: var(--font-size-h1); */
-  text-transform: uppercase;
-  text-align: center;
+.btn:hover {
+  opacity: 0.8;
+  background-color: var(--primary-color);
 }
 
-.modal p {
-  margin-bottom: 0;
-  text-align: center;
+.modal-header .close {
+  color: var(--primary-color);
+  opacity: 1.0;
 }
 
-.modal-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 150px;
+.modal-header {
+  border-bottom: 0 none;
 }
 
-/* Loading animation styling */
-#loading-container {
-  display: none;
+.modal-footer {
+  border-top: 0 none;
 }
 
-#loading-container.is-visible {
-  position: fixed;
-  padding: 20px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-
-  /* to show it above other content */
-  z-index: 999;
-
-  /* to allow scrolling if the screen is not high enough*/
-  overflow: auto;
-
-  /* this is used to center the modal */
-  display: grid;
-  text-align: center;
-}
-
-/* Spinner element that rotates when loading */
-.spinner {
-  margin: auto;
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  border: 5px solid #f3f3f3;
-  border-top: 6px solid #9c41f2;
-  border-radius: 100%;
-  animation: spin 1s infinite linear;
-}
-
-/* animation for spinner element */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-/* #### Responsive Design styling #### */
-@media all and (max-width: 750px) {
-  /*TBD*/
-}
-
-@media all and (max-width: 500px) {
-  /*TBD*/
-}
-
-@media all and (min-width: 500px) and (max-width: 750px) {
-  /*TBD*/
+.navbar.custom {
+  background-color: var(--background-color);
 }
