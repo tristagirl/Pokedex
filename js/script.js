@@ -1,8 +1,13 @@
+/* created an IIFE to wrap the previous 'global variables' (e.g. pokemonList) and
+turn them into 'local variables', so they are protected from changes and don't conflict with other variables or external code.*/
+
 let pokemonRepository = (function () {
     let pokemonList = [];
+    //created an empty array of pokemon objects to use with the 'PokéAPI'.
     let apiURL = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
     let modalContainer = document.querySelector('#exampleModal');
 
+    // created function to, when required, add new pokemon to the pokemonList array.
     function add(pokemon) {
         if (
             typeof pokemon === 'object' &&
@@ -14,11 +19,12 @@ let pokemonRepository = (function () {
         }
     }
 
+//created function to return all items within the pokemonList array, on demand.
 
     function getAll() {
         return pokemonList;
     }
-
+ //created function to add, within the pokemon-list ul, list items with buttons holding a Pokemon's name as its inner text.
     function addListItem(pokemon) {
         let pokemonList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
@@ -55,7 +61,7 @@ let pokemonRepository = (function () {
     //     pokemonImg.src = pokemon.imageUrl;
     //     imgDiv.appendChild(pokemonImg);
     // })
-    
+
 
     function loadList() {
         return fetch(apiURL).then(function (response) {
@@ -77,6 +83,7 @@ let pokemonRepository = (function () {
         let url = pokemon.detailsURL;
         return fetch(url).then(function (response) {
             return response.json();
+            // now we add the details (e.g. height, abilities) to the item, to the pokemon
         }).then(function (details) {
             pokemon.types = details.types;
             pokemon.height = details.height;
@@ -87,14 +94,15 @@ let pokemonRepository = (function () {
             console.error(e);
         })
     }
-
+// function to show details of the pokemon on the button 'click' event, called above within addListItem function.
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
             showModal(pokemon);
         });
-        
+
     }
 
+//function to show a Modal with details about a pokemon.
     function showModal(pokemon) {
         let modalBody = $('.modal-body');
         let modalTitle = $('.modal-title');
@@ -133,18 +141,6 @@ let pokemonRepository = (function () {
         });
         pokemonAbility.innerText = 'Abilities: ' + abilitiesCon;
 
-        /*let pokemonAbilityOne = capitalizeFirstLetter(pokemon.abilities[0].ability.name);
-        if (pokemon.abilities[1] === undefined && 
-            pokemon.abilities[2] === undefined) {
-            pokemonAbility.innerText = 'Abilities: ' + pokemonAbilityOne;
-        } else if(pokemon.abilities[2] === undefined) {
-            let pokemonAbilityTwo = capitalizeFirstLetter(pokemon.abilities[1].ability.name);
-            pokemonAbility.innerText = 'Abilities: ' + pokemonAbilityOne + ', ' + pokemonAbilityTwo;
-        } else {
-            let pokemonAbilityTwo = capitalizeFirstLetter(pokemon.abilities[1].ability.name);
-            let pokemonAbilityThree = capitalizeFirstLetter(pokemon.abilities[2].ability.name);
-            pokemonAbility.innerText = 'Abilities: ' + pokemonAbilityOne + ', ' + pokemonAbilityTwo + ', ' + pokemonAbilityThree;
-        } */
 
         modalTitle.append(pokemonName);
         modalBody.append(pokemonImage);
@@ -166,8 +162,8 @@ let pokemonRepository = (function () {
           });
         });
       });
-      
-     
+
+
 
     return {
         add: add,
